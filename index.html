@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Seeds Economy</title>
+    <script src="./lib/Chart.bundle.min.js"></script>
+    <script src="./lib/seeds.bundle.js"></script>
+    <script>
+      window.onload = function() {
+        const ctx = document.getElementById("chart").getContext('2d')
+
+        const { utils, harvest, stats } = seeds
+
+        const numberOfUsers = 8
+        const numberOfPeriods = 100
+        const periods = stats.randomStats(numberOfPeriods, numberOfUsers)
+
+        const labels = ['Genesis'].concat(
+          periods.map((value, index) => `Harvest #${index+1}`)
+        )
+
+        const accounts = periods[0].users.map((value, index) => ({
+          accountName: `Partner ${index}`,
+          initialBalance: 0
+        }))
+
+        const datasets = utils.buildDatasets(accounts, utils.harvestAll(harvest, periods)).map((dataset) => ({
+          ...dataset,
+          fill: false,
+          steppedLine: true,
+          borderColor: '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6)
+        }))
+
+        const harvestChart = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: datasets
+          }
+        });
+      }
+    </script>
+</head>
+<body>
+<div class="chart-container" style="position: relative; height:100%; width:100%">
+    <canvas id="chart"></canvas>
+</div>
+</body>
+</html>
