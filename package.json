@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "src/seeds.js",
   "scripts": {
-    "test": "nyc riteway src/*.test.js | tap-nirvana"
+    "test": "nyc riteway src/*.test.js | tap-nirvana",
+    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
   "license": "MIT",
   "dependencies": {
@@ -11,6 +12,7 @@
   },
   "devDependencies": {
     "browserify": "^16.2.3",
+    "coveralls": "^3.0.3",
     "nyc": "^14.0.0",
     "riteway": "^6.0.3",
     "tap-nirvana": "^1.1.0"
