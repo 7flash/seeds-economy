@@ -53,6 +53,7 @@ const randomStats =
         acc instanceof Array ?
           acc.concat({
             ...value,
+            seedsAmount: acc[acc.length - 1].total.transactionsVolume * 1000 + acc[acc.length - 1].total.transactionsCount * 1000,
             users: R.addIndex(R.map)((user, index) => ({
               ...user,
               seedsPlanted: user.seedsPlanted + acc[acc.length - 1].users[index].seedsPlanted

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "src/seeds.js",
   "scripts": {
+    "build": "browserify src/seeds.js --standalone seeds > seeds.bundle.js",
     "test": "nyc riteway src/*.test.js | tap-nirvana",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
